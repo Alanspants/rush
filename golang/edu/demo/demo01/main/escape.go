@@ -11,7 +11,7 @@ func main() {
 
 	fmt.Println("TOM: \"i love you\"")
 
-	fmt.Println("This is a test output")
+	fmt.Println("This is a test output from alienware")
 
 	fmt.Println("This is a test output from mbp")
 }
