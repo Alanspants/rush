@@ -10,4 +10,6 @@ func main() {
 	fmt.Println("C:\\usr\\xxx\\xxx")
 
 	fmt.Println("TOM: \"i love you\"")
+
+	fmt.Println("This is a test output")
 }
