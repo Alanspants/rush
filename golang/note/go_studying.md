@@ -1,3 +1,5 @@
+
+
 # 基础
 
 ## 入门
@@ -316,6 +318,18 @@ fmt.Printf("b type: %T, b value: %v", b)
 
 OUTPUT:
 b type: bool, b value: true
+```
+
+如果一个不能被转成目标的数，会被转成0
+
+```go
+var str string = "hello"
+var n3 int = 0
+n3, _ = strconv.ParseInt(str, 10, 64)
+fmt.Println(n3)
+
+OUTPUT:
+0
 ```
 
 
