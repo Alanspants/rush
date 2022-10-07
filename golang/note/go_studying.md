@@ -301,5 +301,23 @@ str := strcov.FormatInt(num1, 10)
 var num2 float64 = 23.456
 str := fmt.Sprintf("%f", num2)
 str := strconv.FormatFloat(num2, 'f', 10, 64)
+
+var num3 int = 4567
+str := strconv.Itoa(num3)
 ```
 
+string类型 -> 基本类型
+
+```go
+var str string = "true"
+var b bool
+b, _ = strconv.ParseBool(str)
+fmt.Printf("b type: %T, b value: %v", b)
+
+OUTPUT:
+b type: bool, b value: true
+```
+
+
+
+ 
