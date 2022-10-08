@@ -332,6 +332,32 @@ OUTPUT:
 0
 ```
 
+### 指针
 
+&变量名 -> 查看一个变量的地址
+
+```go
+var i int = 10
+fmt.Println("i address: ", &i)
+
+OUTPUT:
+0*0cc01c0
+```
+
+指针类型，指针变量存的是一个地址，这个地址指向的空间存的才是值。比如：var ptr **int = &num*
+
+```go
+var i int = 10
+// ptr是一个指针变量
+// ptr本身的值是&i
+var ptr *int = &i
+
+// ptr的值 -> 存的是i的地址
+fmt.Printf("ptr=%v\n", ptr)
+// ptr自身的地址
+fmt.Printf("&ptr=%v\n", ptr)
+// ptr的值（i的地址）所指向的变量值
+fmt.Printf("*ptr=%v\n", ptr)
+```
 
  
