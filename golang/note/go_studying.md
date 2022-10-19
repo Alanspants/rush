@@ -394,3 +394,65 @@ OUTPUT:
 5. 0的反码补码都是0
 6. 在计算机运算的时候，都是以补码的方式来运算的
 
+## 代码
+
+### 闭包
+
+```go
+func AddUpper() func (int) int {
+  var n int = 10
+  var str = "hello"
+  return func (x int) int {
+    n = n + x
+    return n
+  }
+}
+
+func main() {
+  f := AddUpper()
+  fmt.Println(f(1)) //11
+  fmt.Println(f(2)) //13
+  fmt.Println(f(3)) //16
+}
+```
+
+闭包中，函数整体相当于一个类，其中定义的变量相当于成员变量，只会在这个函数被初始化的时候执行一次，函数内自带的函数相当于成员方法，每次会在成员变量初始化的基础上反复执行。 
+
+### defer
+
+```go
+func sum(n1 int, n2 int) int {
+  defer fmt.Println("ok1 n1=", n1)// 第三个输出
+  defer fmt.Println("ok1 n2=", n2)// 第二个输出
+  
+  res: = n1 + n2
+  fmt.Println("okk3 res=", res)		// 第一个输出
+}
+```
+
+当执行到defer时，暂时不会执行，会将defer后面的语句压入到独立的栈（defer栈）
+
+当函数执行完毕后，再从defer栈，按照先入后出的顺序出栈，执行
+
+```go
+func sum(n1 int, n2 int) int {
+  defer fmt.Println("ok1 n1=", n1)// 第三个输出 
+  defer fmt.Println("ok1 n2=", n2)// 第二个输出
+  
+  n1++
+  n2++
+  res: = n1 + n2
+  fmt.Println("okk3 res=", res)		// 第一个输出
+}
+```
+
+下侧n1和n2的变化，对print没有影响，因为在++之前，相关变量就已经被压入栈了。
+
+```go
+file = openfile(filename)
+defer file.close()
+
+connect = openDatabase()
+defer connect.close()
+```
+
