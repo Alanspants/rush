@@ -456,3 +456,5 @@ connect = openDatabase()
 defer connect.close()
 ```
 
+### 字符串函数
+
