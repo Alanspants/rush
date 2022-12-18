@@ -1,6 +1,8 @@
-package temp
+package main
 
 import (
+	"fmt"
+	"temp/cargo"
 	"temp/ship"
 )
 
@@ -59,6 +61,17 @@ func main() {
 		WeightTotal:   5,
 	}
 
-	Ships := []ship.Ship{*ship0, *ship1, *ship2, *ship3, *ship4, *ship5}
+	Ships := []*ship.Ship{ship0, ship1, ship2, ship3, ship4, ship5}
 
+	cargo0 := &cargo.Cargo{
+		Id:         0,
+		Desc:       "Car",
+		Weight:     4,
+		TargetCity: "Beijing",
+	}
+
+	availableShip := cargo0.PickAvailableShip(Ships)
+	for _, ship := range availableShip {
+		fmt.Println(ship.Id, ship.TargetCity)
+	}
 }
