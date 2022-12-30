@@ -6,65 +6,60 @@ import (
 	"strings"
 )
 
-func validation(str string, dotNum int) bool {
-	if dotNum == 0 {
-		return true
-	}
-	splitStr := strings.Split(str, ".")
-	for _, s := range splitStr {
-		if len(s) > 1 && len(s) <= 3 && s[0] == '0' {
-			return false
-		}
-		if dotNum == 3 {
-			if len(s) > 3 || len(s) <= 0 {
-				return false
-			} else if v, _ := strconv.Atoi(s); v > 255 {
-				return false
-			}
-		} else {
-			if (3-dotNum+1)*3 <= len(s) {
-				return false
-			}
-		}
-	}
-	return true
-}
-
 func dfs(s string, path string, ans *[]string, index int) {
 
-	if len(path) == (len(s)+3) && validation(path, 3) {
-		*ans = append(*ans, path)
+	//fmt.Println("dfs: ", path, *ans)
+
+	if len(path) == (len(s) + 3) {
+		flag := true
+
+		splitPath := strings.Split(path, ".")
+		for _, s := range splitPath {
+			num, _ := strconv.Atoi(s)
+			if num > 255 {
+				flag = false
+			} else if len(s) > 1 && s[0] == '0' {
+				flag = false
+			}
+		}
+		if flag {
+			*ans = append(*ans, path)
+		}
 		return
 	}
 
-	for i := index; i <= index+3; i++ {
-		if (len(path)-len(s)) > 3 || !validation(path, len(path)-len(s)) {
-			continue
+	for i := index; i < index+3 && i < (len(path)); i++ {
+		currentDotNum := len(path) - len(s) + 1
+
+		//fmt.Print("origin: ", path, " i: ", i, " [")
+
+		//fmt.Printf("origin: %s, i: %d, length: %d [", path, i, len(path))
+		if currentDotNum <= 3 {
+			if (len(path) - i) > (3-currentDotNum+1)*3 {
+				//fmt.Println("kill]")
+				continue
+			}
 		}
-		//temp := path
-		path = path[:i] + "." + path[i:len(path)]
-		dfs(s, path, ans, index+4)
-		path = path[:i] + path[i+1:len(path)]
+
+		//fmt.Println("ok]")
+
+		temp := path
+		path := path[:i] + "." + path[i:]
+
+		//fmt.Println("after: ", path)
+		dfs(s, path, ans, i+2)
+		path = temp
 	}
+
 }
 
 func restoreIpAddresses(s string) []string {
 	ans := []string{}
 	dfs(s, s, &ans, 1)
-	ansMap := map[string]int{}
-
-	for _, str := range ans {
-		ansMap[str] = 1
-	}
-
-	ans = []string{}
-	for k, _ := range ansMap {
-		ans = append(ans, k)
-	}
 	return ans
 }
 
 func main() {
-	fmt.Println("\n", restoreIpAddresses("101023"))
-	//fmt.Println(validation("255.255.11135", 2))
+	s := "25525511135"
+	fmt.Println(restoreIpAddresses(s))
 }
