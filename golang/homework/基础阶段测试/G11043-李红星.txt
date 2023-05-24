@@ -1,0 +1,6 @@
+选择题
+1.AD 2.AB 3.BCD 4.AB 5.CD
+6.B 7.ABD 8.A 9.BD 10.BCD
+判断题
+1-5：TFTTF
+6-7：TF

@@ -1,0 +1,12 @@
+1.ABD
+2.ABD
+3.BCD
+4.AC 
+5.ABCD
+6.D
+7.B
+8.A
+9.AC
+10.ABCD
+
+false false true false（指针不行） false true false
